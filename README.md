@@ -15,8 +15,8 @@ E o bot também pode armazenar um print da oferta:
 
 # Configuração
 
-• Clone o repositório <br>
-• Configurações do funcionamento estão definidas em data/config.json. (Criar screenshot? Criar Notificação? Verificar a quantos ms?). <br>
-• Configurações dos produtos e seus preços estão definidos em data/placas.json. (Contidas as três RTX, de exemplo). <br>
+• Clone o repositório.<br>
+• Configurações do funcionamento estão definidas em <i>data/config.json</i>. (Criar screenshot? Criar Notificação? Verificar a quantos ms?). <br>
+• Configurações dos produtos e seus preços estão definidos em <i>data/placas.json</i>. (Contidas as três RTX, de exemplo). <br>
 • <i>npm install</i> <br>
 • <i>npm start</i> <br>
