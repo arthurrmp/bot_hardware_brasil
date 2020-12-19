@@ -1,6 +1,6 @@
 # Bot RTX Brasil
 
-Um crawler criado para ajudar a economizar que monitore os preços de determinados produtos nos sites mais famosos de hardware do Brasil. Primariamente criado para as novas placas da NVIDIA mas funcional para qualquer produto de interesse do usuário.
+Um crawler criado para ajudar a economizar que monitore os preços de determinados produtos nos sites mais famosos de hardware do Brasil. Primariamente criado para as novas placas da NVIDIA mas funcional para qualquer produto de interesse do usuário. Atualmente suporta KaBuM!, Pichau e Terabyteshop.
 
 Criado usando Node.JS e Puppeteer, simula um usuário comum para os sites, obtém os dados de produtos e preços e os compara com o desejado pelo usuário.
 
@@ -9,9 +9,9 @@ O usuário pode escolher para receber uma notificação do seu sistema operacion
 ![Foto que mostra notificação avisando que uma oferta foi encontrada](https://i.imgur.com/d6eZRNk.jpg)
 <p>Ao clicar na notificação, o usuário será redirecionado para o link da oferta.</p>
 
-E o bot também pode armazenar um print da oferta:
+E o bot também pode armazenar um print da oferta (sem o desfoque):
 
-![Foto que mostra um screenshot da oferta no site da loja](https://i.imgur.com/m9Qpgwm.png)
+![Foto que mostra um screenshot da oferta no site da loja com a logo da loja desfocada](https://i.imgur.com/m9Qpgwm.png)
 <p>Wow, que barato!</p>
 
 # Configuração
