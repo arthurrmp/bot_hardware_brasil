@@ -1,4 +1,4 @@
-# Bot RTX Brasil
+# Bot Hardware Brasil
 
 Um crawler criado para ajudar a economizar que monitore os preços de determinados produtos nos sites mais famosos de hardware do Brasil. Primariamente criado para as novas placas da NVIDIA mas funcional para qualquer produto de interesse do usuário. Atualmente suporta KaBuM!, Pichau e Terabyteshop.
 
@@ -18,7 +18,7 @@ E o bot também pode armazenar um print da oferta (sem o desfoque):
 
 • Clone o repositório.<br><br>
 • Configurações do funcionamento estão definidas em <i>data/config.json</i>. (Criar screenshot? Criar Notificação? Verificar a quantos ms?). <br><br>
-• Configurações dos produtos e seus preços estão definidos em <i>data/placas.json</i>. (Contidas as três RTX, de exemplo). <br>
+• Configurações dos produtos e seus preços estão definidos em <i>data/placas.json</i>. (Contidos três RTX, de exemplo). <br>
 Para ver o bot notificando, é provável que você tenha que aumentar os preços definidos nesse arquivo.<br><br>
 • <i>npm install</i> <br><br>
 • <i>npm start</i> <br><br>
