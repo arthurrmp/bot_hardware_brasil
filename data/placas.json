@@ -1,14 +1,14 @@
 [
     {
         "modelo": "RTX 3080",
-        "precoMax": "7200"
+        "precoMax": "6500"
     },
     {
         "modelo": "RTX 3060 Ti",
-        "precoMax": "3800"
+        "precoMax": "3000"
     },
     {
         "modelo": "RTX 3070",
-        "precoMax": "4600"
+        "precoMax": "4100"
     }
 ]

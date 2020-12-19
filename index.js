@@ -56,7 +56,7 @@ async function getPrices() {
                 if (produto.gpu.includes(placa.modelo) && produto.disponivel) {
                     if (produto.preco <= placa.precoMax) {
                         const urlProduto = produto.href.startsWith('http') ? produto.href : loja.url + produto.href;
-                        console.log(`Oferta Encontrada ${loja.id}! ${produto.gpu} por ${produto.preco}. ${urlProduto}`);
+                        console.log(`Oferta Encontrada na ${loja.id}! ${produto.gpu} por ${produto.preco}. ${urlProduto}`);
                         await page.goto(urlProduto);
                         await delay(2000);
 
@@ -67,7 +67,7 @@ async function getPrices() {
                         }
 
                         if (config.notificarOferta) {
-                            notificar('Oferta de RTX Encontrada!', produto.preco, produto.gpu, urlProduto);
+                            notificar('Oferta Encontrada!', produto.preco, loja.id + ' - ' + produto.gpu, urlProduto);
                         }
 
                     } else {
