@@ -87,8 +87,8 @@ const notificar = (title, preco, message, urlProduto) => {
         {
             title: `${title} (R$ ${preco})`,
             message: message,
-            icon: path.join(__dirname, 'icon.png'), // Absolute path (doesn't work on balloons)
-            sound: true, // Only Notification Center or Windows Toasters
+            icon: path.join(__dirname, 'icon.png'), 
+            sound: true, 
         },
         function (err, response, metadata) {
             if (response == 'activate') {
