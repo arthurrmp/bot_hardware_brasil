@@ -7,6 +7,7 @@ Criado usando Node.JS e Puppeteer, simula um usuário comum para os sites, obté
 O usuário pode escolher para receber uma notificação do seu sistema operacional:
 
 ![Foto que mostra notificação avisando que uma oferta foi encontrada](https://i.imgur.com/d6eZRNk.jpg)
+<p>Ao clicar na notificação, o usuário será redirecionado para o link da oferta.</p>
 
 E o bot também pode armazenar um print da oferta:
 
