@@ -1,0 +1,32 @@
+[
+    {
+        "id": "pichau",
+        "url": "https://www.pichau.com.br",
+        "query": "/catalogsearch/result/index/?product_list_limit=48&product_list_order=preco&q=[MODELO_PLACA]",
+        "precoTag": ".price-boleto",
+        "productTag": ".product-item-link",
+        "excludeIfContains": [
+            "Computador"
+        ]
+    },
+    {
+        "id": "kabum",
+        "url": "https://www.kabum.com.br",
+        "query": "/cgi-local/site/listagem/listagem.cgi?string=[MODELO_PLACA]&btnG=&pagina=1&ordem=3&limite=100&prime=false&marcas=[]&tipo_produto=[]&filtro=[]",
+        "precoTag": ".sc-fznWqX.qatGF",
+        "productTag": ".sc-fzoLsD.gnrNhT.item-nome",
+        "excludeIfContains": [
+            "Computador"
+        ]
+    },
+    {
+        "id": "terabyteshop",
+        "url": "https://www.terabyteshop.com.br",
+        "query": "/busca?str=[MODELO_PLACA]",
+        "precoTag": ".prod-new-price > span",
+        "productTag": ".prod-name",
+        "excludeIfContains": [
+            "Computador"
+        ]
+    }
+]

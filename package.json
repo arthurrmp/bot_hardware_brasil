@@ -1,0 +1,19 @@
+{
+  "name": "rtx_bot_brasil",
+  "version": "1.0.0",
+  "description": "Um bot que usa o Puppeteer para monitorar as lojas para avisar quando há uma RTX 30XX disponível.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Arthur RMP",
+  "license": "ISC",
+  "dependencies": {
+    "node-notifier": "^9.0.0",
+    "opn": "^6.0.0",
+    "puppeteer": "^5.5.0",
+    "puppeteer-extra": "^3.1.15",
+    "puppeteer-extra-plugin-stealth": "^2.6.5"
+  }
+}

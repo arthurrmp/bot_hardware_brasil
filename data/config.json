@@ -1,0 +1,5 @@
+{
+    "printarOferta": true,
+    "notificarOferta": true,
+    "verificarACada": 60000
+}
