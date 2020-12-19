@@ -15,8 +15,9 @@ E o bot também pode armazenar um print da oferta:
 
 # Configuração
 
-• Clone o repositório.<br>
-• Configurações do funcionamento estão definidas em <i>data/config.json</i>. (Criar screenshot? Criar Notificação? Verificar a quantos ms?). <br>
-• Configurações dos produtos e seus preços estão definidos em <i>data/placas.json</i>. (Contidas as três RTX, de exemplo). Como os preços estão abaixo do mercado atualmente, para ver o bot notificando, é provável que você tenha que aumentar os preços definidos nesse arquivo.<br>
-• <i>npm install</i> <br>
-• <i>npm start</i> <br>
+• Clone o repositório.<br><br>
+• Configurações do funcionamento estão definidas em <i>data/config.json</i>. (Criar screenshot? Criar Notificação? Verificar a quantos ms?). <br><br>
+• Configurações dos produtos e seus preços estão definidos em <i>data/placas.json</i>. (Contidas as três RTX, de exemplo). <br>
+Para ver o bot notificando, é provável que você tenha que aumentar os preços definidos nesse arquivo.<br><br>
+• <i>npm install</i> <br><br>
+• <i>npm start</i> <br><br>
