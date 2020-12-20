@@ -10,5 +10,9 @@
     {
         "modelo": "RTX 3070",
         "precoMax": "4500"
+    },
+    {
+        "modelo": "RTX 3090",
+        "precoMax": "10000"
     }
 ]

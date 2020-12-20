@@ -20,7 +20,12 @@ async function getPrices() {
     const page = await browser.newPage();
     for (const loja of lojas) {
         for (const placa of placas) {
-            await page.goto(loja.url + loja.query.replace('[MODELO_PLACA]', placa.modelo.replace(' ', '+')));
+            try {
+                await page.goto(loja.url + loja.query.replace('[MODELO_PLACA]', placa.modelo.replace(' ', '+')));
+            } catch (error) {
+                console.log(error);
+            }
+
             await page.content();
             await page.setViewport({ width: 1920, height: 1080 });
 
@@ -54,16 +59,20 @@ async function getPrices() {
 
             for (const produto of produtos) {
                 if (produto.gpu.includes(placa.modelo) && produto.disponivel) {
+                    let dataHora = new Date();
+                    let dataFormatada = `${dataHora.getDate()}-${dataHora.getMonth()}-${dataHora.getFullYear()} ${dataHora.getHours()}h${dataHora.getMinutes()}m`
                     if (produto.preco <= placa.precoMax) {
                         const urlProduto = produto.href.startsWith('http') ? produto.href : loja.url + produto.href;
-                        console.log(`Oferta Encontrada na ${loja.id}! ${produto.gpu} por ${produto.preco}. ${urlProduto}`);
-                        await page.goto(urlProduto);
+                        console.log(`✅ | ${dataFormatada.replace(/-/g,'/')} | ${placa.modelo} | ${loja.id} | R$ ${produto.preco}`)
+                        try {
+                            await page.goto(urlProduto);
+                        } catch (error) {
+                            console.log(error);
+                        }
                         await delay(2000);
 
                         if (config.printarOferta) {
-                            let dataHora = new Date();
-                            let dataFormatada = `${dataHora.getDate()}-${dataHora.getMonth()}-${dataHora.getFullYear()}-${dataHora.getHours()}h-${dataHora.getMinutes()}m - `
-                            await page.screenshot({ path: 'screenshots/' + dataFormatada + produto.gpu + `.png` });
+                            await page.screenshot({ path: 'screenshots/' + dataFormatada+ ' - ' + produto.gpu + `.png` });
                         }
 
                         if (config.notificarOferta) {
@@ -71,13 +80,14 @@ async function getPrices() {
                         }
 
                     } else {
-                        console.log(`${placa.modelo} encontrada ${loja.id}, mas acima do preço 😢 (R$ ${produto.preco})`)
+                        console.log(`❌ | ${dataFormatada.replace(/-/g,'/')} | ${placa.modelo} | ${loja.id} | R$ ${produto.preco}`)
                     }
                 }
             }
         }
     }
     await browser.close();
+    console.log(`Verificando preços novamente em ${config.verificarACada/60000} minutos`)
     await delay(config.verificarACada);
     getPrices();
 }
@@ -87,8 +97,8 @@ const notificar = (title, preco, message, urlProduto) => {
         {
             title: `${title} (R$ ${preco})`,
             message: message,
-            icon: path.join(__dirname, 'icon.png'), 
-            sound: true, 
+            icon: path.join(__dirname, 'icon.png'),
+            sound: true,
         },
         function (err, response, metadata) {
             if (response == 'activate') {
