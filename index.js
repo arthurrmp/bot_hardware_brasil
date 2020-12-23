@@ -65,7 +65,9 @@ async function getPrices() {
             for (const produto of produtos) {
                 if (produto.gpu.includes(placa.modelo) && produto.disponivel) {
                     let dataHora = new Date();
-                    let dataFormatada = `${dataHora.getDate()}-${dataHora.getMonth()}-${dataHora.getFullYear()} ${dataHora.getHours()}h${dataHora.getMinutes()}m`
+                    let dataFormatada = `${dataHora.getDate()}-${dataHora.getMonth()}-${dataHora.getFullYear()} ${dataHora.getHours()}h${dataHora.getMinutes()}m`;
+                    const dataFormatadaNew = dataFormatada.replace(/-/g, '/');
+
                     if (produto.preco <= placa.precoMax) {
                         const urlProduto = produto.href.startsWith('http') ? produto.href : loja.url + produto.href;
                         //console.log(`${dataFormatada.replace(/-/g, '/')} | ${placa.modelo} | ${loja.id} | ${chalk.green(`R$ ${produto.preco}`)}`);
@@ -87,7 +89,6 @@ async function getPrices() {
 
                     } else {
                         //console.log(`${dataFormatada.replace(/-/g, '/')} | ${placa.modelo} | ${loja.id} | ${chalk.red(`R$ ${produto.preco}`)}`);
-                        const dataFormatadaNew = dataFormatada.replace(/-/g, '/');
                         console.log(`| ${padding(dataFormatadaNew,20)}|${padding(placa.modelo,20)}|${padding(loja.id,20)}|${chalk.red(padding(`R$ ${produto.preco}`,20))} |`)
                     }
                 }
@@ -95,7 +96,8 @@ async function getPrices() {
         }
     }
     await browser.close();
-    console.log(`Verificando preços novamente em ${config.verificarACada / 60000} minutos`)
+    console.log(' -------------------------------------------------------------------------------------')
+    console.log(`Verificando preços novamente em ${config.verificarACada / 60000} minutos... `)
     await delay(config.verificarACada);
     getPrices();
 }
