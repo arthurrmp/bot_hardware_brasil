@@ -15,7 +15,7 @@ O usuário pode escolher para receber uma notificação do seu sistema operacion
 E o bot também pode armazenar um print da oferta (sem o desfoque):
 
 ![Foto que mostra um screenshot da oferta no site da loja com a logo da loja desfocada](https://i.imgur.com/m9Qpgwm.png)
-<p>Wow, que barato!</p>
+<p>Wow, que barato! 😐</p>
 
 # Configuração
 
