@@ -4,6 +4,9 @@ Um crawler criado para ajudar a economizar monitorando os preços de determinado
 
 Criado usando Node.JS e Puppeteer, simula um usuário comum para os sites, obtém os dados de produtos e preços e os compara com o desejado pelo usuário.
 
+![Foto que mostra vários resultados de preços de placa de vídeo](https://i.imgur.com/sF6Tn85.png)
+<p>Formato dos dados mostrados no terminal. Em verde, um preço abaixo do determinado pelo usuário no arquivo <i>data/placas.json</i></p>
+
 O usuário pode escolher para receber uma notificação do seu sistema operacional:
 
 ![Foto que mostra notificação avisando que uma oferta foi encontrada](https://i.imgur.com/d6eZRNk.jpg)
