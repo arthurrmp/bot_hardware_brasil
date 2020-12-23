@@ -21,7 +21,7 @@ async function getPrices() {
     const page = await browser.newPage();
 
     console.log(' -------------------------------------------------------------------------------------')
-    console.log(`| ${padding('HORA',20)}|${padding('PLACA',20)}|${padding('LOJA',20)}|${padding(`PREÇO`,20)} |`)
+    console.log(`| ${padding('HORA', 20)}|${padding('PLACA', 20)}|${padding('LOJA', 20)}|${padding(`PREÇO`, 20)} |`)
     console.log(' -------------------------------------------------------------------------------------')
 
     for (const loja of lojas) {
@@ -63,7 +63,9 @@ async function getPrices() {
                 }
             }
             for (const produto of produtos) {
-                if (produto.gpu.includes(placa.modelo) && produto.disponivel) {
+                /* A verificação 'incluiTodaPalavra' é necessária para verificar se o produto encontrado é realmente o desejado,
+                 pois os sites costumam incluir produtos que não são o buscado. Exemplo: Ao pesquisar RTX3070, também incluem a RTX 3080. */
+                if (incluiTodaPalavra(produto.gpu, placa.modelo) && produto.disponivel) {
                     let dataHora = new Date();
                     let dataFormatada = `${dataHora.getDate()}-${dataHora.getMonth()}-${dataHora.getFullYear()} ${dataHora.getHours()}h${dataHora.getMinutes()}m`;
                     const dataFormatadaNew = dataFormatada.replace(/-/g, '/');
@@ -71,7 +73,7 @@ async function getPrices() {
                     if (produto.preco <= placa.precoMax) {
                         const urlProduto = produto.href.startsWith('http') ? produto.href : loja.url + produto.href;
                         //console.log(`${dataFormatada.replace(/-/g, '/')} | ${placa.modelo} | ${loja.id} | ${chalk.green(`R$ ${produto.preco}`)}`);
-                        console.log(`| ${padding(dataFormatadaNew,20)}|${padding(placa.modelo,20)}|${padding(loja.id,20)}|${chalk.green(padding(`R$ ${produto.preco}`,20))} |`)
+                        console.log(`| ${padding(dataFormatadaNew, 20)}|${padding(placa.modelo, 20)}|${padding(loja.id, 20)}|${chalk.green(padding(`R$ ${produto.preco}`, 20))} |`)
                         try {
                             await page.goto(urlProduto);
                         } catch (error) {
@@ -89,7 +91,7 @@ async function getPrices() {
 
                     } else {
                         //console.log(`${dataFormatada.replace(/-/g, '/')} | ${placa.modelo} | ${loja.id} | ${chalk.red(`R$ ${produto.preco}`)}`);
-                        console.log(`| ${padding(dataFormatadaNew,20)}|${padding(placa.modelo,20)}|${padding(loja.id,20)}|${chalk.red(padding(`R$ ${produto.preco}`,20))} |`)
+                        console.log(`| ${padding(dataFormatadaNew, 20)}|${padding(placa.modelo, 20)}|${padding(loja.id, 20)}|${chalk.red(padding(`R$ ${produto.preco}`, 20))} |`)
                     }
                 }
             }
@@ -118,7 +120,6 @@ const notificar = (title, preco, message, urlProduto) => {
     );
 }
 
-
 function padding(column, lenMax) {
     if (column.length <= lenMax) {
         const lenString = lenMax - column.length;
@@ -130,6 +131,18 @@ function padding(column, lenMax) {
         }
         return (`${aStart}${column}${aEnd}`)
     }
+}
+
+function incluiTodaPalavra(stringASerPesquisada, stringsParaPesquisar) {
+
+    const arrayPesquisaStrings = stringsParaPesquisar.split(' ');
+
+    for (const pesquisa of arrayPesquisaStrings) {
+        if (!stringASerPesquisada.includes(pesquisa)) {
+            return false;
+        }
+    }
+    return true;
 }
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
