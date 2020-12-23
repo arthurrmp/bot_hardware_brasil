@@ -12,9 +12,9 @@ O usuário pode escolher para receber uma notificação do seu sistema operacion
 ![Foto que mostra notificação avisando que uma oferta foi encontrada](https://i.imgur.com/d6eZRNk.jpg)
 <p>Ao clicar na notificação, o usuário será redirecionado para o link da oferta.</p>
 
-E o bot também pode armazenar um print da oferta (sem o desfoque):
+E o bot também pode armazenar um print da oferta:
 
-![Foto que mostra um screenshot da oferta no site da loja com a logo da loja desfocada](https://i.imgur.com/m9Qpgwm.png)
+![Foto que mostra um screenshot da oferta no site da loja](https://i.imgur.com/u6ER667.png)
 <p>Wow, que barato! 😐</p>
 
 # Configuração
