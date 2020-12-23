@@ -1,3 +1,4 @@
+const chalk = require('chalk');
 const notifier = require('node-notifier');
 const path = require('path');
 const opn = require('opn')
@@ -18,6 +19,11 @@ async function getPrices() {
 
     const browser = await puppeteer.launch(chromeOptions);
     const page = await browser.newPage();
+
+    console.log(' -------------------------------------------------------------------------------------')
+    console.log(`| ${padding('HORA',20)}|${padding('PLACA',20)}|${padding('LOJA',20)}|${padding(`PREÇO`,20)} |`)
+    console.log(' -------------------------------------------------------------------------------------')
+
     for (const loja of lojas) {
         for (const placa of placas) {
             try {
@@ -56,14 +62,14 @@ async function getPrices() {
                     produtos.push({ gpu: gpuFormat, href: hrefs[i], preco: precoFormat, disponivel: disponibilidadeFormat })
                 }
             }
-
             for (const produto of produtos) {
                 if (produto.gpu.includes(placa.modelo) && produto.disponivel) {
                     let dataHora = new Date();
                     let dataFormatada = `${dataHora.getDate()}-${dataHora.getMonth()}-${dataHora.getFullYear()} ${dataHora.getHours()}h${dataHora.getMinutes()}m`
                     if (produto.preco <= placa.precoMax) {
                         const urlProduto = produto.href.startsWith('http') ? produto.href : loja.url + produto.href;
-                        console.log(`✅ | ${dataFormatada.replace(/-/g,'/')} | ${placa.modelo} | ${loja.id} | R$ ${produto.preco}`)
+                        //console.log(`${dataFormatada.replace(/-/g, '/')} | ${placa.modelo} | ${loja.id} | ${chalk.green(`R$ ${produto.preco}`)}`);
+                        console.log(`| ${padding(dataFormatadaNew,20)}|${padding(placa.modelo,20)}|${padding(loja.id,20)}|${chalk.green(padding(`R$ ${produto.preco}`,20))} |`)
                         try {
                             await page.goto(urlProduto);
                         } catch (error) {
@@ -72,7 +78,7 @@ async function getPrices() {
                         await delay(2000);
 
                         if (config.printarOferta) {
-                            await page.screenshot({ path: 'screenshots/' + dataFormatada+ ' - ' + produto.gpu + `.png` });
+                            await page.screenshot({ path: 'screenshots/' + dataFormatada + ' - ' + produto.gpu + `.png` });
                         }
 
                         if (config.notificarOferta) {
@@ -80,14 +86,16 @@ async function getPrices() {
                         }
 
                     } else {
-                        console.log(`❌ | ${dataFormatada.replace(/-/g,'/')} | ${placa.modelo} | ${loja.id} | R$ ${produto.preco}`)
+                        //console.log(`${dataFormatada.replace(/-/g, '/')} | ${placa.modelo} | ${loja.id} | ${chalk.red(`R$ ${produto.preco}`)}`);
+                        const dataFormatadaNew = dataFormatada.replace(/-/g, '/');
+                        console.log(`| ${padding(dataFormatadaNew,20)}|${padding(placa.modelo,20)}|${padding(loja.id,20)}|${chalk.red(padding(`R$ ${produto.preco}`,20))} |`)
                     }
                 }
             }
         }
     }
     await browser.close();
-    console.log(`Verificando preços novamente em ${config.verificarACada/60000} minutos`)
+    console.log(`Verificando preços novamente em ${config.verificarACada / 60000} minutos`)
     await delay(config.verificarACada);
     getPrices();
 }
@@ -106,6 +114,20 @@ const notificar = (title, preco, message, urlProduto) => {
             }
         }
     );
+}
+
+
+function padding(column, lenMax) {
+    if (column.length <= lenMax) {
+        const lenString = lenMax - column.length;
+        let aStart = '';
+        aStart = aStart.padStart(lenString / 2, ' ');
+        let aEnd = aStart;
+        if (aStart.length + aEnd.length + column.length !== lenMax) {
+            aEnd = ' ' + aEnd;
+        }
+        return (`${aStart}${column}${aEnd}`)
+    }
 }
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
