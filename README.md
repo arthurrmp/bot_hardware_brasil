@@ -1,6 +1,6 @@
 # Bot Hardware Brasil
 
-Um crawler criado para ajudar a economizar que monitore os preços de determinados produtos nos sites mais famosos de hardware do Brasil. Primariamente criado para as novas placas da NVIDIA mas funcional para qualquer produto de interesse do usuário. Atualmente suporta KaBuM!, Pichau e Terabyteshop.
+Um crawler criado para ajudar a economizar monitorando os preços de determinados produtos nos sites mais famosos de hardware do Brasil. Primariamente criado para as novas placas da NVIDIA mas funcional para qualquer produto de interesse do usuário. Atualmente suporta KaBuM!, Pichau e Terabyteshop.
 
 Criado usando Node.JS e Puppeteer, simula um usuário comum para os sites, obtém os dados de produtos e preços e os compara com o desejado pelo usuário.
 
