@@ -1,9 +1,10 @@
 const chalk = require('chalk');
 const notifier = require('node-notifier');
 const path = require('path');
-const opn = require('opn')
+const opn = require('opn');
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+const fs = require('fs');
 puppeteer.use(StealthPlugin());
 
 const chromeOptions = {
@@ -12,7 +13,9 @@ const chromeOptions = {
     UserAgent: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36`
 };
 
+
 async function getPrices() {
+
     const lojas = require('./data/lojas.json');
     const placas = require('./data/placas.json');
     const config = require('./data/config.json');
@@ -72,8 +75,7 @@ async function getPrices() {
 
                     if (produto.preco <= placa.precoMax) {
                         const urlProduto = produto.href.startsWith('http') ? produto.href : loja.url + produto.href;
-                        //console.log(`${dataFormatada.replace(/-/g, '/')} | ${placa.modelo} | ${loja.id} | ${chalk.green(`R$ ${produto.preco}`)}`);
-                        console.log(`| ${padding(dataFormatadaNew, 20)}|${padding(placa.modelo, 20)}|${padding(loja.id, 20)}|${chalk.green(padding(`R$ ${produto.preco}`, 20))} |`)
+                        console.log(chalk`| ${padding(dataFormatadaNew, 20)}|${padding(placa.modelo, 20)}|{${loja.color} ${padding(loja.id, 20)}}|{green ${padding(`R$ ${produto.preco}`, 20)}} |`)
                         try {
                             await page.goto(urlProduto);
                         } catch (error) {
@@ -82,7 +84,15 @@ async function getPrices() {
                         await delay(2000);
 
                         if (config.printarOferta) {
-                            await page.screenshot({ path: 'screenshots/' + dataFormatada + ' - ' + produto.gpu + `.png` });
+                            const caminho = `screenshots/${produto.gpu.substring(0, 60)}... - ${loja.id} - R$${produto.preco}.png`;
+                            try {
+                                if (!fs.existsSync(caminho)) {
+                                    await page.screenshot({ path: caminho });
+                                }
+                            } catch (error) {
+                                console.log('Não foi possível salvar screenshot', error);
+                            }
+
                         }
 
                         if (config.notificarOferta) {
@@ -91,7 +101,7 @@ async function getPrices() {
 
                     } else {
                         //console.log(`${dataFormatada.replace(/-/g, '/')} | ${placa.modelo} | ${loja.id} | ${chalk.red(`R$ ${produto.preco}`)}`);
-                        console.log(`| ${padding(dataFormatadaNew, 20)}|${padding(placa.modelo, 20)}|${padding(loja.id, 20)}|${chalk.red(padding(`R$ ${produto.preco}`, 20))} |`)
+                        console.log(chalk`| ${padding(dataFormatadaNew, 20)}|${padding(placa.modelo, 20)}|{${loja.color} ${padding(loja.id, 20)}}|{red ${padding(`R$ ${produto.preco}`, 20)}} |`)
                     }
                 }
             }
@@ -105,19 +115,25 @@ async function getPrices() {
 }
 
 const notificar = (title, preco, message, urlProduto) => {
-    notifier.notify(
-        {
-            title: `${title} (R$ ${preco})`,
-            message: message,
-            icon: path.join(__dirname, 'icon.png'),
-            sound: true,
-        },
-        function (err, response, metadata) {
-            if (response == 'activate') {
-                opn(urlProduto);
+    try {
+        notifier.notify(
+            {
+                title: `${title} (R$ ${preco})`,
+                message: message,
+                icon: path.join(__dirname, 'icon.png'),
+                sound: true,
+            },
+            function (err, response, metadata) {
+                if (response == 'activate') {
+                    opn(urlProduto);
+                }
             }
-        }
-    );
+        );
+    } catch (error) {
+        console.log('Não foi possível notificar ', error);
+    }
+
+
 }
 
 function padding(column, lenMax) {

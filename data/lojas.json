@@ -5,6 +5,7 @@
         "query": "/catalogsearch/result/index/?product_list_limit=48&product_list_order=preco&q=[MODELO_PLACA]",
         "precoTag": ".price-boleto",
         "productTag": ".product-item-link",
+        "color": "rgb(214,0,0)",
         "excludeIfContains": [
             "Computador"
         ]
@@ -15,6 +16,7 @@
         "query": "/cgi-local/site/listagem/listagem.cgi?string=[MODELO_PLACA]&btnG=&pagina=1&ordem=3&limite=100&prime=false&marcas=[]&tipo_produto=[]&filtro=[]",
         "precoTag": ".sc-fznWqX.qatGF",
         "productTag": ".sc-fzoLsD.gnrNhT.item-nome",
+        "color": "rgb(251, 149, 23)",
         "excludeIfContains": [
             "Computador"
         ]
@@ -25,6 +27,7 @@
         "query": "/busca?str=[MODELO_PLACA]",
         "precoTag": ".prod-new-price > span",
         "productTag": ".prod-name",
+        "color": "rgb(230, 191, 2)",
         "excludeIfContains": [
             "Computador"
         ]
