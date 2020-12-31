@@ -84,7 +84,7 @@ async function getPrices() {
                         await delay(2000);
 
                         if (config.printarOferta) {
-                            const caminho = `screenshots/${produto.gpu.substring(0, 60)}... - ${loja.id} - R$${produto.preco}.png`.replace(/\\/g, '').replace(/\//g, '');
+                            const caminho = `screenshots/` + `${produto.gpu.substring(0, 60)}... - ${loja.id} - R$${produto.preco}.png`.replace(/\\/g, '').replace(/\//g, '');
                             try {
                                 if (!fs.existsSync(caminho)) {
                                     await page.screenshot({ path: caminho });
