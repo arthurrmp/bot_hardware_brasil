@@ -72,8 +72,11 @@ async function getPrices() {
                     let dataHora = new Date();
                     let dataFormatada = `${dataHora.getDate()}-${dataHora.getMonth()}-${dataHora.getFullYear()} ${dataHora.getHours()}h${dataHora.getMinutes()}m`;
                     const dataFormatadaNew = dataFormatada.replace(/-/g, '/');
+                    
 
-                    if (produto.preco <= placa.precoMax) {
+//                    console.log(parseInt(produto.preco) <= parseInt(placa.precoMax))
+
+                    if (parseInt(produto.preco) <= parseInt(placa.precoMax)) {
                         const urlProduto = produto.href.startsWith('http') ? produto.href : loja.url + produto.href;
                         console.log(chalk`| ${padding(dataFormatadaNew, 20)}|${padding(placa.modelo, 20)}|{${loja.color} ${padding(loja.id, 20)}}|{green ${padding(`R$ ${produto.preco}`, 20)}} |`)
                         try {
